@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar } from "primereact/avatar";
 import { Divider } from "primereact/divider";
 import { Menu } from "primereact/menu";
+import { Dialog } from "primereact/dialog";
+import FileUploadDialog from "../ui/FileUploadDialog";
 
 
 const SideBar = ()=> {
+  const [visible, setVisible] = useState(false);
 
   let topItems = [
     { label: 'Yeni Röntgen Yükle', icon: 'pi pi-plus',
       command:()=>{
-
+        setVisible(true)
       } 
   },
     { label: 'Rönten Listesi', icon: 'pi pi-search' }
@@ -20,7 +23,7 @@ const SideBar = ()=> {
   ];
 
     return (
-        <div className="layout-sidebar">
+      <div className="layout-sidebar">
         <div className="sidebar-header flex flex-column">
               <img width={24} height={22} src="https://e7.pngegg.com/pngimages/621/162/png-clipart-gray-and-teal-logo-illustration-logo-dentistry-tooth-surgery-dental-logo-miscellaneous-blue-thumbnail.png" alt="" />
               <span className="ml-2">Çağatay Dentist</span>
@@ -47,6 +50,11 @@ const SideBar = ()=> {
 
       
         </div>
+
+        <Dialog header="Yeni Röntgen Yükle" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
+            <FileUploadDialog />
+        </Dialog>
+
       </div>
     )
 }
